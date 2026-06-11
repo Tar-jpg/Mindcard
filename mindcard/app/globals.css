@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-grad: radial-gradient(1200px 700px at 12% -8%, #ECE7FF 0%, rgba(236, 231, 255, 0) 55%),
+    radial-gradient(1000px 620px at 92% 4%, #D8F4EE 0%, rgba(216, 244, 238, 0) 52%),
+    radial-gradient(900px 700px at 50% 108%, #FFE7DC 0%, rgba(255, 231, 220, 0) 55%);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas text-ink font-body antialiased;
+    background-image: var(--bg-grad);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+  ::selection {
+    @apply bg-lavender-200 text-ink;
+  }
+  /* Calm scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cfc7fb transparent;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+  }
+  .glass-soft {
+    @apply bg-white/55 backdrop-blur-md border border-white/50;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-medium
+           transition-all duration-300 active:scale-[0.97] select-none;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-lavender-500 to-lavender-400 text-white
+           px-7 py-3.5 shadow-soft hover:shadow-glow hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn bg-white/70 text-ink-soft px-6 py-3 border border-white/70
+           hover:bg-white hover:-translate-y-0.5 shadow-soft;
+  }
+  .card-surface {
+    @apply rounded-4xl glass shadow-card;
+  }
+  .section {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .heading-gradient {
+    @apply bg-gradient-to-r from-lavender-600 via-lavender-500 to-mint-500
+           bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
